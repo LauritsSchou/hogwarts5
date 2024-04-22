@@ -99,6 +99,9 @@ public class TeacherService {
         teacherDTO.mainSubject(),
         teacherDTO.employmentDate()
     );
+    if (teacherDTO.name() != null) {
+      entity.setFullName(teacherDTO.name());
+    }
 
     return entity;
   }

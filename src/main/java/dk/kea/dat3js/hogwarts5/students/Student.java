@@ -1,12 +1,13 @@
 package dk.kea.dat3js.hogwarts5.students;
 
+import dk.kea.dat3js.hogwarts5.common.PersonWithNames;
 import dk.kea.dat3js.hogwarts5.house.House;
 import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
-public class Student {
+public class Student implements PersonWithNames {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
@@ -25,9 +26,9 @@ public class Student {
   }
 
   public Student(String firstName, String middleName, String lastName, House house, int schoolYear) {
-    setFirstName(firstName);
-    setMiddleName(middleName);
-    setLastName(lastName);
+    this.firstName = firstName;
+    this.middleName = middleName;
+    this.lastName = lastName;
     this.house = house;
     this.schoolYear = schoolYear;
   }
@@ -62,53 +63,7 @@ public class Student {
   public void setLastName(String lastName) {
     this.lastName = capitalize(lastName);
   }
-  public String getFullName() {
-    return firstName + " " + (middleName != null ? middleName + " " : "") + lastName;
-  }
-  public void setFullName(String fullName) {
-    if (fullName == null) {
-      return;
-    }
 
-    if (fullName.trim().isEmpty()) {
-      setFirstName("");
-      setMiddleName(null);
-      setLastName(null);
-      return;
-    }
-
-    int firstSpace = fullName.indexOf(" ");
-    int lastSpace = fullName.lastIndexOf(" ");
-
-    if (firstSpace == -1) { // No spaces found, it's a single name
-      setFirstName(fullName);
-      setMiddleName(null);
-      setLastName(null);
-    } else {
-      setFirstName(fullName.substring(0, firstSpace));
-
-      if (lastSpace > firstSpace) {
-        setMiddleName(fullName.substring(firstSpace + 1, lastSpace));
-        setLastName(fullName.substring(lastSpace + 1));
-      } else {
-        setMiddleName(null);
-        setLastName(fullName.substring(firstSpace + 1));
-      }
-    }
-  }
-  private String capitalize(String name) {
-    if (name == null) {
-      return null;
-    }
-    if (name.length() < 2) {
-      return name.toUpperCase();
-    }
-    if (name.contains(" ")) {
-      int space = name.indexOf(" ");
-      return capitalize(name.substring(0, space)) + " " + capitalize(name.substring(space + 1));
-    }
-    return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
-  }
 
   public House getHouse() {
     return house;

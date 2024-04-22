@@ -93,9 +93,9 @@ class StudentTest {
 // act
         student.setFullName(null);
 //assert
-        assertEquals("First", student.getFirstName());
-        assertEquals("Middle", student.getMiddleName());
-        assertEquals("Last", student.getLastName());
+        assertEquals("first", student.getFirstName());
+        assertEquals("middle", student.getMiddleName());
+        assertEquals("last", student.getLastName());
     }
     @Test
     void capitalizeIndividualNames(){
