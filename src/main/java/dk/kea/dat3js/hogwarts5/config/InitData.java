@@ -64,9 +64,9 @@ public class InitData implements CommandLineRunner {
     existingTeachers.addAll(teacherRepository.findAll());
 
     Teacher severus = new Teacher("Severus", "Prince", "Snape", slytherin, "Potions", LocalDate.of(1981, 11, 1));
-    Teacher minerva = new Teacher("Minerva", "", "McGonagall", gryffindor, "Transfiguration", LocalDate.of(1956, 12, 1));
-    Teacher filius = new Teacher("Filius", "", "Flitwick", ravenclaw, "Charms", LocalDate.of(1975, 9, 1));
-    Teacher pomona = new Teacher("Pomona", "", "Sprout", hufflepuff, "Herbology", LocalDate.of(1975, 9, 1));
+    Teacher minerva = new Teacher("Minerva", "McGonagall", gryffindor, "Transfiguration", LocalDate.of(1956, 12, 1));
+    Teacher filius = new Teacher("Filius", "Flitwick", ravenclaw, "Charms", LocalDate.of(1975, 9, 1));
+    Teacher pomona = new Teacher("Pomona", "Sprout", hufflepuff, "Herbology", LocalDate.of(1975, 9, 1));
     Teacher sybill = new Teacher("Sybill", "Cassandra", "Trelawney", ravenclaw, "Divination", LocalDate.of(1979, 9, 1));
     Teacher alastor = new Teacher("Alastor", "Mad-Eye", "Moody", gryffindor, "Defence Against the Dark Arts", LocalDate.of(1994, 9, 1));
 

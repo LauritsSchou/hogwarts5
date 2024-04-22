@@ -3,6 +3,8 @@ package dk.kea.dat3js.hogwarts5.teachers;
 import dk.kea.dat3js.hogwarts5.teachers.Teacher;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -11,66 +13,66 @@ class TeacherTest {
     @Test
     void getFullNameWithMiddleName() {
 //arrange
-        Teacher teacher = new Teacher("Harry", "James", "Potter", null, 1);
+        Teacher teacher = new Teacher("Severus", "Prince", "Snape", null, "Potions", LocalDate.of(1981, 11, 1));
 
 
 // act
         var fullName = teacher.getFullName();
 
 //assert
-        assertEquals("Harry James Potter", fullName);
+        assertEquals("Severus Prince Snape", fullName);
     }
     @Test
     void getFullNameWithoutMiddleName() {
 //arrange
-        Teacher teacher = new Teacher("Cho", null, "Chang", null, 1);
+        Teacher teacher = new Teacher("Minerva", "Mcgonagall", null, null, null);
 
         // act
         var fullName = teacher.getFullName();
 
         //assert
-        assertEquals("Cho Chang", fullName);
+        assertEquals("Minerva Mcgonagall", fullName);
 
     }
     @Test
     void setFullNameWithMiddleName() {
 //arrange
-        Teacher teacher = new Teacher("first", "middle", "last", null, 1);
+        Teacher teacher = new Teacher("first", "middle",  "last", null, "Potions", LocalDate.of(1981, 11, 1));
 // act
-        teacher.setFullName("Harry James Potter");
+        teacher.setFullName("Severus Prince Snape");
 //assert
-        assertEquals("Harry", teacher.getFirstName());
-        assertEquals("James", teacher.getMiddleName());
-        assertEquals("Potter", teacher.getLastName());
+        assertEquals("Severus", teacher.getFirstName());
+        assertEquals("Prince", teacher.getMiddleName());
+        assertEquals("Snape", teacher.getLastName());
     }
 
     @Test
     void setFullNameWithoutMiddleName() {
 //arrange
-        Teacher teacher = new Teacher("first", "middle", "last", null, 1);
+        Teacher teacher = new Teacher("first", "middle", "last", null, null, null);
 // act
-        teacher.setFullName("Cho Chang");
+        teacher.setFullName("Minerva Mcgonagall");
 //assert
-        assertEquals("Cho", teacher.getFirstName());
+        assertEquals("Minerva", teacher.getFirstName());
         assertNull(teacher.getMiddleName());
-        assertEquals("Chang", teacher.getLastName());
+        assertEquals("Mcgonagall", teacher.getLastName());
     }
 
     @Test
     void setFullNameWithoutLastName(){
 //arrange
-        Teacher teacher = new Teacher("first", "middle", "last", null, 1);
+        Teacher teacher = new Teacher("first", "middle", "last", null, null, null);
 // act
-        teacher.setFullName("Cho");
+        teacher.setFullName("Firenze");
 //assert
-        assertEquals("Cho", teacher.getFirstName());
+        assertEquals("Firenze", teacher.getFirstName());
         assertNull(teacher.getMiddleName());
         assertNull(teacher.getLastName());
     }
     @Test
     void setFullNameWithMultipleMiddleNames(){
 //arrange
-        Teacher teacher = new Teacher("first", "middle", "last", null, 1);
+        Teacher teacher = new Teacher("first", "middle", "last", null, null, null);
 // act
         teacher.setFullName("Albus Pervical Wulfric Dumbledore");
 //assert
@@ -81,7 +83,7 @@ class TeacherTest {
     @Test
     void setFullNameWithEmptyString(){
 //arrange
-        Teacher teacher = new Teacher("first", "middle", "last", null, 1);
+        Teacher teacher = new Teacher("first", "middle", "last", null, null, null);
 // act
         teacher.setFullName("");
 //assert
@@ -91,7 +93,7 @@ class TeacherTest {
     }
     @Test void setFullNameWithNull(){
 //arrange
-        Teacher teacher = new Teacher("first", "middle", "last", null, 1);
+        Teacher teacher = new Teacher("first", "middle", "last", null, null, null);
 // act
         teacher.setFullName(null);
 //assert
@@ -102,7 +104,7 @@ class TeacherTest {
     @Test
     void capitalizeIndividualNames(){
 //arrange
-        Teacher teacher = new Teacher("first", "middle", "last", null, 1);
+        Teacher teacher = new Teacher("first", "middle", "last", null, null, null);
 // act
         teacher.setFirstName("harry");
         teacher.setMiddleName("james");
@@ -116,7 +118,7 @@ class TeacherTest {
     @Test
     void capitalizeIndividualNamesWithCrazyCapitalization(){
 //arrange
-        Teacher teacher = new Teacher("first", "middle", "last", null, 1);
+        Teacher teacher = new Teacher("first", "middle", "last", null, null, null);
 // act
         teacher.setFirstName("hArRy");
         teacher.setMiddleName("jAmEs");

@@ -49,7 +49,7 @@ public class Teacher implements PersonWithNames {
   }
 
   public void setFirstName(String firstName) {
-    capitalize(firstName);
+    this.firstName = capitalize(firstName);
   }
 
   public String getMiddleName() {
@@ -57,7 +57,7 @@ public class Teacher implements PersonWithNames {
   }
 
   public void setMiddleName(String middleName) {
-    capitalize(middleName);
+    this.middleName = capitalize(middleName);
   }
 
   public String getLastName() {
@@ -65,7 +65,7 @@ public class Teacher implements PersonWithNames {
   }
 
   public void setLastName(String lastName) {
-    capitalize(lastName);
+    this.lastName = capitalize(lastName);
   }
 
   public House getHouse() {
