@@ -25,9 +25,9 @@ public class Student {
   }
 
   public Student(String firstName, String middleName, String lastName, House house, int schoolYear) {
-    this.firstName = firstName;
-    this.middleName = middleName;
-    this.lastName = lastName;
+    setFirstName(firstName);
+    setMiddleName(middleName);
+    setLastName(lastName);
     this.house = house;
     this.schoolYear = schoolYear;
   }
@@ -45,11 +45,11 @@ public class Student {
   }
 
   public void setFirstName(String firstName) {
-    this.firstName = firstName;
+    this.firstName = capitalize(firstName);
   }
 
   public String getMiddleName() {
-    return middleName;
+    return capitalize(middleName);
   }
 
   public void setMiddleName(String middleName) {
@@ -57,7 +57,7 @@ public class Student {
   }
 
   public String getLastName() {
-    return lastName;
+    return capitalize(lastName);
   }
 
   public void setLastName(String lastName) {
@@ -72,9 +72,9 @@ public class Student {
     }
 
     if (fullName.trim().isEmpty()) {
-      this.firstName = "";
-      this.middleName = null;
-      this.lastName = null;
+      setFirstName("");
+      setMiddleName(null);
+      setLastName(null);
       return;
     }
 
@@ -82,20 +82,33 @@ public class Student {
     int lastSpace = fullName.lastIndexOf(" ");
 
     if (firstSpace == -1) { // No spaces found, it's a single name
-      this.firstName = fullName;
-      this.middleName = null;
-      this.lastName = null;
+      setFirstName(fullName);
+      setMiddleName(null);
+      setLastName(null);
     } else {
-      this.firstName = fullName.substring(0, firstSpace);
+      setFirstName(fullName.substring(0, firstSpace));
 
       if (lastSpace > firstSpace) {
-        this.middleName = fullName.substring(firstSpace + 1, lastSpace);
-        this.lastName = fullName.substring(lastSpace + 1);
+        setMiddleName(fullName.substring(firstSpace + 1, lastSpace));
+        setLastName(fullName.substring(lastSpace + 1));
       } else {
-        this.middleName = null;
-        this.lastName = fullName.substring(firstSpace + 1);
+        setMiddleName(null);
+        setLastName(fullName.substring(firstSpace + 1));
       }
     }
+  }
+  private String capitalize(String name) {
+    if (name == null) {
+      return null;
+    }
+    if (name.length() < 2) {
+      return name.toUpperCase();
+    }
+    if (name.contains(" ")) {
+      int space = name.indexOf(" ");
+      return capitalize(name.substring(0, space)) + " " + capitalize(name.substring(space + 1));
+    }
+    return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
   }
 
   public House getHouse() {

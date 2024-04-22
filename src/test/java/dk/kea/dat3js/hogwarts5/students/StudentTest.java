@@ -93,8 +93,35 @@ class StudentTest {
 // act
         student.setFullName(null);
 //assert
-        assertEquals("first", student.getFirstName());
-        assertEquals("middle", student.getMiddleName());
-        assertEquals("last", student.getLastName());
+        assertEquals("First", student.getFirstName());
+        assertEquals("Middle", student.getMiddleName());
+        assertEquals("Last", student.getLastName());
+    }
+    @Test
+    void capitalizeIndividualNames(){
+//arrange
+        Student student = new Student("first", "middle", "last", null, 1);
+// act
+        student.setFirstName("harry");
+        student.setMiddleName("james");
+        student.setLastName("potter");
+//assert
+        assertEquals("Harry", student.getFirstName());
+        assertEquals("James", student.getMiddleName());
+        assertEquals("Potter", student.getLastName());
+    }
+
+    @Test
+    void capitalizeIndividualNamesWithCrazyCapitalization(){
+//arrange
+        Student student = new Student("first", "middle", "last", null, 1);
+// act
+        student.setFirstName("hArRy");
+        student.setMiddleName("jAmEs");
+        student.setLastName("pOtTeR");
+//assert
+        assertEquals("Harry", student.getFirstName());
+        assertEquals("James", student.getMiddleName());
+        assertEquals("Potter", student.getLastName());
     }
 }
