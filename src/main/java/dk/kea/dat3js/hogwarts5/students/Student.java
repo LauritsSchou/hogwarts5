@@ -63,6 +63,40 @@ public class Student {
   public void setLastName(String lastName) {
     this.lastName = lastName;
   }
+  public String getFullName() {
+    return firstName + " " + (middleName != null ? middleName + " " : "") + lastName;
+  }
+  public void setFullName(String fullName) {
+    if (fullName == null) {
+      return;
+    }
+
+    if (fullName.trim().isEmpty()) {
+      this.firstName = "";
+      this.middleName = null;
+      this.lastName = null;
+      return;
+    }
+
+    int firstSpace = fullName.indexOf(" ");
+    int lastSpace = fullName.lastIndexOf(" ");
+
+    if (firstSpace == -1) { // No spaces found, it's a single name
+      this.firstName = fullName;
+      this.middleName = null;
+      this.lastName = null;
+    } else {
+      this.firstName = fullName.substring(0, firstSpace);
+
+      if (lastSpace > firstSpace) {
+        this.middleName = fullName.substring(firstSpace + 1, lastSpace);
+        this.lastName = fullName.substring(lastSpace + 1);
+      } else {
+        this.middleName = null;
+        this.lastName = fullName.substring(firstSpace + 1);
+      }
+    }
+  }
 
   public House getHouse() {
     return house;
