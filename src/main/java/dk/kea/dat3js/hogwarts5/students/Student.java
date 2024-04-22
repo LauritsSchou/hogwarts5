@@ -49,19 +49,18 @@ public class Student {
   }
 
   public String getMiddleName() {
-    return capitalize(middleName);
+    return this.middleName;
   }
 
   public void setMiddleName(String middleName) {
-    this.middleName = middleName;
+    this.middleName = capitalize(middleName);
   }
-
   public String getLastName() {
-    return capitalize(lastName);
+   return this.lastName;
   }
 
   public void setLastName(String lastName) {
-    this.lastName = lastName;
+    this.lastName = capitalize(lastName);
   }
   public String getFullName() {
     return firstName + " " + (middleName != null ? middleName + " " : "") + lastName;
