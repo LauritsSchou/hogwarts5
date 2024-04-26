@@ -25,13 +25,13 @@ class TeacherTest {
     @Test
     void getFullNameWithoutMiddleName() {
 //arrange
-        Teacher teacher = new Teacher("Minerva", "Mcgonagall", null, null, null);
+        Teacher teacher = new Teacher("Minerva", "McGonagall", null, null, null);
 
         // act
         var fullName = teacher.getFullName();
 
         //assert
-        assertEquals("Minerva Mcgonagall", fullName);
+        assertEquals("Minerva McGonagall", fullName);
 
     }
     @Test
@@ -51,11 +51,11 @@ class TeacherTest {
 //arrange
         Teacher teacher = new Teacher("first", "middle", "last", null, null, null);
 // act
-        teacher.setFullName("Minerva Mcgonagall");
+        teacher.setFullName("Minerva McGonagall");
 //assert
         assertEquals("Minerva", teacher.getFirstName());
         assertNull(teacher.getMiddleName());
-        assertEquals("Mcgonagall", teacher.getLastName());
+        assertEquals("McGonagall", teacher.getLastName());
     }
 
     @Test
@@ -127,5 +127,19 @@ class TeacherTest {
         assertEquals("Harry", teacher.getFirstName());
         assertEquals("James", teacher.getMiddleName());
         assertEquals("Potter", teacher.getLastName());
+    }
+    @Test
+    void capitalizeNameWhenStartsWithMc(){
+//arrange
+        Teacher teacher = new Teacher("first", "middle", "last", null, null, null);
+// act
+        teacher.setFirstName("minerva");
+        teacher.setMiddleName(null);
+        teacher.setLastName("mcgonagall");
+
+//assert
+        assertEquals("Minerva", teacher.getFirstName());
+        assertNull(teacher.getMiddleName());
+        assertEquals("McGonagall", teacher.getLastName());
     }
 }

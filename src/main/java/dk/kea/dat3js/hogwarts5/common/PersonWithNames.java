@@ -53,6 +53,10 @@ public interface PersonWithNames {
             int space = name.indexOf(" ");
             return capitalize(name.substring(0, space)) + " " + capitalize(name.substring(space + 1));
         }
+        if(name.substring(0, 2).equalsIgnoreCase("Mc"))
+        {
+            return "Mc" + name.substring(2, 3).toUpperCase() + name.substring(3).toLowerCase();
+        }
         return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
     }
 }
