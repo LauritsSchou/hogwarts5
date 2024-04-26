@@ -26,7 +26,7 @@ public interface PersonWithNames {
         int firstSpace = fullName.indexOf(" ");
         int lastSpace = fullName.lastIndexOf(" ");
 
-        if (firstSpace == -1) { // No spaces found, it's a single name
+        if (firstSpace == -1) {
             setFirstName(fullName);
             setMiddleName(null);
             setLastName(null);
