@@ -7,15 +7,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/prefects")
 public class PrefectController {
     private final StudentService studentService;
+    private final PrefectService prefectService;
 
-    public PrefectController(StudentService studentService) {
+    public PrefectController(StudentService studentService, PrefectService prefectService) {
         this.studentService = studentService;
+        this.prefectService = prefectService;
     }
 
     @PostMapping
@@ -34,5 +37,9 @@ public class PrefectController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+    @GetMapping()
+    public List<StudentResponseDTO> getAllPrefects() {
+        return prefectService.findAllPrefects();
     }
 }
