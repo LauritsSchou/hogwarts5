@@ -79,7 +79,8 @@ public class StudentService {
         studentEntity.getLastName(),
         studentEntity.getFullName(),
         studentEntity.getHouse().getName(),
-        studentEntity.getSchoolYear()
+        studentEntity.getSchoolYear(),
+            studentEntity.isPrefect()
     );
 
     return dto;
@@ -91,7 +92,8 @@ public class StudentService {
         studentDTO.middleName(),
         studentDTO.lastName(),
         houseService.findById(studentDTO.house()).orElseThrow(),
-        studentDTO.schoolYear()
+        studentDTO.schoolYear(),
+            studentDTO.prefect()
     );
     if(studentDTO.name() != null) {
       entity.setFullName(studentDTO.name());
