@@ -23,11 +23,15 @@ public class StudentService {
   public Optional<StudentResponseDTO> findById(int id) {
     return studentRepository.findById(id).map(this::toDTO);
   }
-
+public Optional<Student> findStudentById(int id) {
+        return studentRepository.findById(id);
+    }
   public StudentResponseDTO save(StudentRequestDTO student) {
     return toDTO(studentRepository.save(fromDTO(student)));
   }
-
+public Student saveStudent (Student student) {
+        return studentRepository.save(student);
+    }
   public Optional<StudentResponseDTO> updateIfExists(int id, StudentRequestDTO student) {
     if (studentRepository.existsById(id)) {
       Student existingStudent = fromDTO(student);
@@ -71,7 +75,7 @@ public class StudentService {
     return existingStudent;
   }
 
-  private StudentResponseDTO toDTO(Student studentEntity) {
+  public StudentResponseDTO toDTO(Student studentEntity) {
     StudentResponseDTO dto = new StudentResponseDTO(
         studentEntity.getId(),
         studentEntity.getFirstName(),

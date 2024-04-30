@@ -25,4 +25,13 @@ public class PrefectService {
                 .filter(StudentResponseDTO::prefect)
                 .collect(Collectors.toList());
     }
+    public List<StudentResponseDTO> findAllPrefectsByHouse(String house) {
+        // Fetch all students
+        List<StudentResponseDTO> students = studentService.findAll();
+        // Filter out the prefects
+        return students.stream()
+                .filter(student -> student.house().equalsIgnoreCase(house))
+                .filter(StudentResponseDTO::prefect)
+                .collect(Collectors.toList());
+    }
 }

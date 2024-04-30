@@ -27,10 +27,10 @@ import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -118,6 +118,56 @@ public class PrefectControllerTest {
                 .andExpect(jsonPath("$[1].house").value(prefects.get(1).house()))
                 .andExpect(jsonPath("$[1].schoolYear").value(prefects.get(1).schoolYear()))
                 .andExpect(jsonPath("$[1].prefect").value(prefects.get(1).prefect()));
+    }
+    @Test
+    public void testGetPrefectsByHouse() throws Exception {
+        // Create a list of StudentResponseDTO objects
+        List<StudentResponseDTO> prefects = new ArrayList<>();
+        prefects.add(new StudentResponseDTO(1, "Harry", "James", "Potter", "Harry James Potter", "Gryffindor", 5, true));
+        prefects.add(new StudentResponseDTO(2, "Hermione", "Jean", "Granger", "Hermione Jean Granger", "Gryffindor", 5, true));
+
+        // Mock the PrefectService to return the list of prefects when findAllPrefectsByHouse is called
+        when(prefectService.findAllPrefectsByHouse("Gryffindor")).thenReturn(prefects);
+
+        // Perform a GET request to /prefects/house/Gryffindor
+        mockMvc.perform(get("/prefects/house/Gryffindor")
+                        .contentType("application/json"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].id").value(prefects.get(0).id()))
+                .andExpect(jsonPath("$[0].firstName").value(prefects.get(0).firstName()))
+                .andExpect(jsonPath("$[0].middleName").value(prefects.get(0).middleName()))
+                .andExpect(jsonPath("$[0].lastName").value(prefects.get(0).lastName()))
+                .andExpect(jsonPath("$[0].fullName").value(prefects.get(0).fullName()))
+                .andExpect(jsonPath("$[0].house").value(prefects.get(0).house()))
+                .andExpect(jsonPath("$[0].schoolYear").value(prefects.get(0).schoolYear()))
+                .andExpect(jsonPath("$[0].prefect").value(prefects.get(0).prefect()))
+                .andExpect(jsonPath("$[1].id").value(prefects.get(1).id()))
+                .andExpect(jsonPath("$[1].firstName").value(prefects.get(1).firstName()))
+                .andExpect(jsonPath("$[1].middleName").value(prefects.get(1).middleName()))
+                .andExpect(jsonPath("$[1].lastName").value(prefects.get(1).lastName()))
+                .andExpect(jsonPath("$[1].fullName").value(prefects.get(1).fullName()))
+                .andExpect(jsonPath("$[1].house").value(prefects.get(1).house()))
+                .andExpect(jsonPath("$[1].schoolYear").value(prefects.get(1).schoolYear()))
+                .andExpect(jsonPath("$[1].prefect").value(prefects.get(1).prefect()));
+    }
+
+    @Test
+    public void testDeletePrefect() throws Exception {
+        // Create a Student object with the prefect property set to true
+        Student student = new Student("Harry", "James", "Potter", null, 5, true);
+
+        // Mock the service to return the student when findStudentById is called with 1
+        when(studentService.findStudentById(1)).thenReturn(Optional.of(student));
+
+        // Perform a DELETE request to /prefects/1
+        mockMvc.perform(delete("/prefects/1")
+                        .contentType("application/json"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.prefect").value(false));
+
+        // Verify that the prefect property of the student is now false
+        assertFalse(student.isPrefect());
     }
 
 }

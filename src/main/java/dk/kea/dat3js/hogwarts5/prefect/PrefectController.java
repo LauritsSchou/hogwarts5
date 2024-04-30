@@ -31,15 +31,34 @@ public class PrefectController {
     public ResponseEntity<Optional<StudentResponseDTO>> getPrefect(@PathVariable int id) {
         // Fetch the student from the data source using the provided id
         Optional<StudentResponseDTO> student = studentService.findById(id);
-       // Return the student if the prefect property is true
+        // Return the student if the prefect property is true
         if (student.isPresent() && student.get().prefect()) {
             return ResponseEntity.of(Optional.of(student));
         } else {
             return ResponseEntity.notFound().build();
         }
     }
+
     @GetMapping()
     public List<StudentResponseDTO> getAllPrefects() {
         return prefectService.findAllPrefects();
+    }
+
+    @GetMapping("/house/{house}")
+    public List<StudentResponseDTO> getPrefectsByHouse(@PathVariable String house) {
+        return prefectService.findAllPrefectsByHouse(house);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Student> deletePrefect(@PathVariable int id) {
+        Optional<Student> studentOptional = studentService.findStudentById(id);
+        if (studentOptional.isPresent()) {
+            Student student = studentOptional.get();
+            if (student.isPrefect()) {
+                student.setPrefect(false);
+                studentService.saveStudent(student);
+                return ResponseEntity.ok(student);
+            }
+        }
+        return ResponseEntity.notFound().build();
     }
 }
